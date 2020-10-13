@@ -1,3 +1,13 @@
+#sidebarMenu {
+    overflow-y: auto;
+    height: 100%;
+    position: fixed;
+}
+
+input {
+    text-align: center;
+}
+
 .RandomAdvice {
     align-items: center;
     display: flex;
@@ -8,10 +18,10 @@
 
 .divAdvice {
     align-items: center;
+    color: white;
     display: flex;
     justify-content: center;
     padding: 40px;
-    color: white;
     text-align: center;
 }
 

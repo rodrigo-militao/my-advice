@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { ChromePicker } from 'react-color';
 import adviceAPI from '../service/AdviceApi';
-import logo from '../img/logo.png'
+import TopMenu from '../components/TopMenu';
 
 function RandomAdvice() {
   const [advice, setAdvice] = useState('');
   const [width, setWidth] = useState(450);
-  const [height, setHeight] = useState(150);
+  const [height, setHeight] = useState(250);
   const [background, setBackground] = useState("#458888");
-  const [color, setColor] = useState("#ffff");
+  const [fontColor, setFontColor] = useState("#ffff");
   const [fontSize, setFontSize] = useState(25);
 
   useEffect(() => {
@@ -19,54 +20,71 @@ function RandomAdvice() {
       backgroundColor: background,
       width: width + "px",
       height: height + "px",
-      color: color,
+      color: fontColor,
     }
   };
   const { containerStyle } = styles;
   
   return (
     <div id="home">
-      <nav className="navbar navbar-light" style={{backgroundColor: "#e3f2fd"}}>
-        <div className="container-fluid">
-        <a className="navbar-brand" href="#home">
-          <img src={logo} alt="Logo random advice" width="130" height="130" className="d-inline-block align-top" />
-        </a>
-          <form className="d-flex">
-            <label htmlFor="width" className="mr-2  col-sm-1">
-              Width:
-              <input className="form-control" id="width" value={width} onChange={(e) => setWidth(e.target.value)} type="number" placeholder="Width" aria-label="Width"/>
-            </label>
-            <label htmlFor="height" className="mr-2  col-sm-1">
-              Height:
-              <input className="form-control" id="height" value={height} onChange={(e) => setHeight(e.target.value)}  type="number" placeholder="Height" aria-label="Height"/>
-            </label>
-            <label htmlFor="fontsize" className="mr-2  col-sm-1">
-              Font Size:
-              <input className="form-control" id="fontsize" value={fontSize} onChange={(e) => setFontSize(e.target.value)}  type="number" placeholder="Font-Size" aria-label="Font-Size"/>
-            </label>
-            <label htmlFor="background" className="mr-2  col-sm-2">
-              Background Color:
-              <input className="form-control" id="background" value={background} onChange={(e) => setBackground(e.target.value)} type="text" placeholder="Background" aria-label="Background"/>
-            </label>
-            <label htmlFor="color" className="mr-2  col-sm-2">
-              Font Color:
-              <input className="form-control" id="color" value={color} onChange={(e) => setColor(e.target.value)}  type="text" placeholder="Font-Color" aria-label="Font-Color"/>
-            </label>
-          </form>
-        </div>
-      </nav>
-      <div className="RandomAdvice">
-        <div className="divAdvice" style={containerStyle}>
-          <p className="adviceText" style={{fontSize: fontSize + "px"}}>{advice}</p>
-        </div>
-        <div className="buttonSeeImg">
-          <button className="btn btn-secondary btn-lg btn-block" type="button" id="seeImg">Generate image</button>
-        </div>
-        <div className="divImage">
-          <img id="textScreenshot" src="" />
+      <TopMenu />
+      <div className="container-fluid">
+        <div className="row">
+          <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse p-5">
+            <div className="position-sticky pt-3 pb-5 text-center">
+              <ul className="nav flex-column">
+                <li className="nav-item">
+                  <label htmlFor="width" className="mb-4">
+                    Width:
+                    <input className="form-control" id="width" value={width} onChange={(e) => setWidth(e.target.value)} type="number" placeholder="Width" aria-label="Width"/>
+                  </label>
+                </li>
+                <li className="nav-item">
+                  <label htmlFor="height" className="mb-4">
+                    Height:
+                    <input className="form-control" id="height" value={height} onChange={(e) => setHeight(e.target.value)}  type="number" placeholder="Height" aria-label="Height"/>
+                  </label>
+                </li>
+                <li className="nav-item">
+                  <label htmlFor="fontsize" className="mb-4">
+                    Font Size:
+                    <input className="form-control" id="fontsize" value={fontSize} onChange={(e) => setFontSize(e.target.value)}  type="number" placeholder="Font-Size" aria-label="Font-Size"/>
+                  </label>
+                </li>
+                <li className="nav-item">
+                  <label htmlFor="background" className="mb-4">
+                    Background Color:
+                    <ChromePicker 
+                      color={ background }
+                      onChangeComplete={ (color) => setBackground(color.hex) }
+                    />
+                  </label>
+                </li>
+                <li className="nav-item">
+                  <label htmlFor="fontColor" className="mb-4">
+                    Font Color:
+                    <ChromePicker 
+                      color={ fontColor }
+                      onChangeComplete={ (color) => setFontColor(color.hex) }
+                    />
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div className="RandomAdvice col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div className="divAdvice" style={containerStyle}>
+              <p className="adviceText" style={{fontSize: fontSize + "px"}}>{advice}</p>
+            </div>
+            <div className="buttonSeeImg mt-5">
+              <button className="btn btn-secondary btn-lg btn-block" type="button" id="seeImg">Generate image</button>
+            </div>
+            <div className="divImage mt-5">
+              <img id="textScreenshot" src="" />
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
   );
 }

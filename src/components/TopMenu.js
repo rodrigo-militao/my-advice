@@ -1,17 +1,18 @@
 import React from 'react';
+import logo from '../img/logo.png'
+
 
 function TopMenu() {
   return (
-    <nav class="navbar navbar-light bg-light">
-      <div class="container-fluid">
-        <form class="d-flex">
-          <input class="form-control mr-2" type="text" placeholder="Width" aria-label="Width"/>
-          <input class="form-control mr-2" type="text" placeholder="Height" aria-label="Height"/>
-          <input class="form-control mr-2" type="text" placeholder="Background" aria-label="Background"/>
-          <input class="form-control mr-2" type="text" placeholder="Font-Color" aria-label="Font-Color"/>
-        </form>
-      </div>
-    </nav>
+    <header className="navbar navbar-dark sticky-top d-flex justify-content-around p-0 shadow text-center"  style={{backgroundColor: "#e3f2fd"}}>
+      <h1 className="text-primary">Get your Random Advice, and save it as an image.</h1>
+      <a className="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">
+        <img src={logo} alt="Logo random advice" width="80" height="80" className="d-inline-block align-top" />
+      </a>
+      <button className="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+    </header>
   );
 }
 
